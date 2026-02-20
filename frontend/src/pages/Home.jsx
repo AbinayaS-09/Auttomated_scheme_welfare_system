@@ -10,8 +10,8 @@ const Home = () => {
       <header className="bg-white border-b-4 border-orange-500 shadow-sm">
         <div className="bg-gradient-to-r from-orange-600 to-orange-500 text-white py-1 px-4">
           <div className="max-w-7xl mx-auto flex justify-between text-xs">
-            <span>Government of India</span>
-            <span>Welcome</span>
+            <span>भारत सरकार | Government of India</span>
+            <span>स्वागत है | Welcome</span>
           </div>
         </div>
         
@@ -23,7 +23,7 @@ const Home = () => {
               </div>
               <div>
                 <h1 className="text-3xl font-bold text-gray-800">Scheme Portal</h1>
-                <p className="text-sm text-gray-600">Empowering Every Citizen</p>
+                <p className="text-sm text-gray-600">योजना पोर्टल - Empowering Every Citizen</p>
               </div>
             </div>
             

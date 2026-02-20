@@ -1,13 +1,14 @@
-import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Home from './pages/Home';
 import UserLogin from './pages/UserLogin';
 import UserRegister from './pages/UserRegister';
 import UserHome from './pages/UserHome';
 import UserProfile from './pages/UserProfile';
+import EligibleSchemes from './pages/EligibleSchemes';
 import AdminLogin from './pages/AdminLogin';
 import AdminRegister from './pages/AdminRegister';
 import AdminHome from './pages/AdminHome';
+
 
 // Protected Route Component
 const ProtectedRoute = ({ children, allowedRole }) => {
@@ -50,6 +51,14 @@ function App() {
           element={
             <ProtectedRoute allowedRole="user">
               <UserProfile />
+            </ProtectedRoute>
+          } 
+        />
+           <Route 
+          path="/user/schemes" 
+          element={
+            <ProtectedRoute allowedRole="user">
+              <EligibleSchemes />
             </ProtectedRoute>
           } 
         />

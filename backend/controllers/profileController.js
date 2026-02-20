@@ -197,7 +197,7 @@
 //   }
 // };
 const User = require("../models/User");
-const UserProfile = require("../models/UserProfile");
+const UserProfile = require("../models/UserProfil");
 const { Op } = require("sequelize");
 
 // GET PROFILE

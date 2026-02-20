@@ -30,7 +30,7 @@ const schemeRoutes = require("./routes/scheme.routes");
 // const ngoRoutes = require("./routes/ngoScraperRoutes");
 // Import models
 const User = require("./models/User");
-const UserProfile = require("./models/UserProfile");
+const UserProfile = require("./models/UserProfil");
 
 
 // Setup relationships
