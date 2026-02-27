@@ -1,5 +1,5 @@
 const puppeteer = require("puppeteer");
-const Scheme = require("../models/Scheme");
+const Scheme = require("../models/Schem");
 
 async function scrapeMyScheme() {
   const browser = await puppeteer.launch({

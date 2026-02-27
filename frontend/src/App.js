@@ -5,6 +5,7 @@ import UserRegister from './pages/UserRegister';
 import UserHome from './pages/UserHome';
 import UserProfile from './pages/UserProfile';
 import EligibleSchemes from './pages/EligibleSchemes';
+import SchemeDetail from './pages/SchemeDetail';
 import AdminLogin from './pages/AdminLogin';
 import AdminRegister from './pages/AdminRegister';
 import AdminHome from './pages/AdminHome';
@@ -59,6 +60,14 @@ function App() {
           element={
             <ProtectedRoute allowedRole="user">
               <EligibleSchemes />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/schemes/:id" 
+          element={
+            <ProtectedRoute allowedRole="user">
+              <SchemeDetail />
             </ProtectedRoute>
           } 
         />

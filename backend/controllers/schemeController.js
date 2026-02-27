@@ -1,6 +1,6 @@
-const Scheme = require("../models/scheme");
+const Scheme = require("../models/Schem");
 const SchemeEligibility = require("../models/schemeEligibility");
-const UserProfile = require("../models/UserProfil");
+const UserProfile = require("../models/UserProfile");
 const FuzzyEligibilityMatcher = require("../utils/fuzzyEligibilityMatcher");
 const { Op } = require("sequelize");
 
