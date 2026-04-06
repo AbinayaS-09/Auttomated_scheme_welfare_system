@@ -1,6 +1,11 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/db");
 
+/*Because one table stores full scheme information for display, and the other stores structured eligibility rules for matching/filtering.
+*/
+
+// SchemeEligibility.js defines the SchemeEligibility model which captures detailed eligibility criteria for each scheme.
+// It includes fields for age, income
 const SchemeEligibility = sequelize.define(
   "SchemeEligibility",
   {

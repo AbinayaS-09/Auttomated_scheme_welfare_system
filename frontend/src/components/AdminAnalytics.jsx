@@ -2,9 +2,23 @@ import React, { useState, useEffect } from 'react';
 import { 
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, 
   PieChart, Pie, Cell, Legend, LineChart, Line, AreaChart, Area
-} from 'recharts';
+} from 'recharts';//react chart librray for rendering charts
 import { Target, Activity, Users, MapPin } from 'lucide-react';
 
+
+
+/*AdminAnalyticsPage
+        ↓
+<AdminAnalytics />
+        ↓
+API call to backend
+        ↓
+Data stored in state
+        ↓
+Converted into chart format
+        ↓
+Charts rendered on screen
+*/
 const AdminAnalytics = () => {
   const [data, setData] = useState({ schemesByLevel: [], usersByState: [] });
   const [loading, setLoading] = useState(true);

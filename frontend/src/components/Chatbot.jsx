@@ -77,7 +77,11 @@ const Chatbot = () => {
                     <div className="flex-1 p-4 overflow-y-auto bg-gray-50 flex flex-col gap-3">
                         {messages.map((msg, idx) => (
                             <div key={idx} className={`max-w-[80%] p-3 rounded-xl text-sm ${msg.role === 'user' ? 'bg-blue-600 text-white self-end rounded-br-none' : 'bg-gray-200 text-gray-800 self-start rounded-bl-none'}`}>
-                                {msg.content}
+                                {msg.role === 'assistant' ? (
+                                    <div className="whitespace-pre-wrap" dangerouslySetInnerHTML={{ __html: msg.content.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>') }} />
+                                ) : (
+                                    <div className="whitespace-pre-wrap">{msg.content}</div>
+                                )}
                             </div>
                         ))}
                         {isLoading && (

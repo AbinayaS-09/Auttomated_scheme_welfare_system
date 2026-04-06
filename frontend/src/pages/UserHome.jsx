@@ -2,7 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Chatbot from '../components/Chatbot';
 import UserAnalytics from '../components/UserAnalytics';
-
+// The UserHome component serves as the main dashboard for users after they log in.
+//  It displays a welcome banner, key statistics about available schemes and user applications,
+//  and a list of featured schemes that match the user's profile.
+//  The component fetches necessary data from the backend API upon mounting and provides 
+// navigation options to other parts of the user portal, such as the profile page and analytics dashboard. 
+// It also includes a logout function to clear user data and redirect to the home page.
 const UserHome = () => {
   const navigate = useNavigate();
   const [profile, setProfile] = useState(null);

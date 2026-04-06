@@ -1,20 +1,20 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import Home from './pages/Home';
-import UserLogin from './pages/UserLogin';
-import UserRegister from './pages/UserRegister';
-import UserHome from './pages/UserHome';
-import UserProfile from './pages/UserProfile';
-import UserAnalyticsPage from './pages/UserAnalyticsPage';
-import AllSchemes from './pages/AllSchemes';
-import EligibleSchemes from './pages/EligibleSchemes';
-import SchemeDetail from './pages/SchemeDetail';
-import AdminLogin from './pages/AdminLogin';
-import AdminRegister from './pages/AdminRegister';
-import AdminHome from './pages/AdminHome';
-import AdminAnalyticsPage from './pages/AdminAnalyticsPage';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';//BrowserRouter = browser history, Routes = routes, Route = route, Navigate = navigate
+import Home from './pages/Home';//Home page
+import UserLogin from './pages/UserLogin';//User login page
+import UserRegister from './pages/UserRegister';//User register page
+import UserHome from './pages/UserHome';//User home page
+import UserProfile from './pages/UserProfile';//User profile page
+import UserAnalyticsPage from './pages/UserAnalyticsPage';//User analytics page
+import AllSchemes from './pages/AllSchemes';//All schemes page
+import EligibleSchemes from './pages/EligibleSchemes';//Eligible schemes page
+import SchemeDetail from './pages/SchemeDetail';//Scheme detail page
+import AdminLogin from './pages/AdminLogin';//Admin login page
+import AdminRegister from './pages/AdminRegister';//Admin register page
+import AdminHome from './pages/AdminHome';//Admin home page
+import AdminAnalyticsPage from './pages/AdminAnalyticsPage';//Admin analytics page
 
 
-// Protected Route Component
+// Protected Route Component-->Protected Route = Only authorized users can access that page
 const ProtectedRoute = ({ children, allowedRole }) => {
   const token = localStorage.getItem('token');
   const userRole = localStorage.getItem('userRole');

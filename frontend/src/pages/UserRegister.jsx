@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+// The UserRegister component provides a registration form for new users to create an account. It includes fields for name, email, password, confirm password, and a consent checkbox. The form data is managed using React's useState hook, and upon submission, it sends a POST request to the backend API to register the user. The component also handles validation (password match and consent) and displays error messages if registration fails. Upon successful registration, it redirects the user to the login page.
 const UserRegister = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({

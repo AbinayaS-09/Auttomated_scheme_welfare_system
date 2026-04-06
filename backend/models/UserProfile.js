@@ -1,3 +1,6 @@
+// UserProfile.js defines the UserProfile model with fields for user demographics,
+//  social categories, risk factors, and profile management. It establishes a one-to-one relationship with the User model 
+// using userId as a foreign key. This model is used to store detailed information about each user's profile in the database.
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/db");
 

@@ -1,39 +1,63 @@
 const puppeteer = require("puppeteer");
-const Scheme = require("../models/Schem");
+const Scheme = require("../models/Schem");//Imports Scheme model
 
+//Why used?
+
+//To save scraped scheme data into database
+
+/*This file:
+
+opens MyScheme website
+collects scheme links
+visits each scheme page
+extracts scheme data
+saves into database
+
+This is your data collection engine.*/
 async function scrapeMyScheme() {
+
+  /*headless: "new" → runs browser in background (without visible UI)
+--no-sandbox → useful for deployment environments
+--disable-setuid-sandbox → avoids sandbox permission issues*/
   const browser = await puppeteer.launch({
     headless: "new",
     args: ["--no-sandbox", "--disable-setuid-sandbox"],
   });
-
+//Creates a browser tab/page
   const page = await browser.newPage();
+  //Sets browser screen size
   await page.setViewport({ width: 1366, height: 768 });
 
   // Go to search page
+  //“This navigates to the search page of the source website, where the list of government schemes is available.”
   await page.goto("https://www.myscheme.gov.in/search", { 
-    waitUntil: "networkidle0",
-    timeout: 60000 
+    waitUntil: "networkidle0",//Waits until network is idle (no more than 0 network connections for at least 500 ms)
+    timeout: 60000 // Waits up to 60 seconds for the page to load
   });
   
   await page.waitForSelector("a[href*='/schemes/']", { timeout: 60000 });
 
   // Scroll to load more schemes
+  //“This scrolls down the page multiple times to ensure that all schemes are loaded, as the website may use lazy loading to display more schemes as you scroll.”
   let previousHeight;
   for (let i = 0; i < 5; i++) {
     previousHeight = await page.evaluate("document.body.scrollHeight");
     await page.evaluate("window.scrollTo(0, document.body.scrollHeight)");
-    await new Promise(r => setTimeout(r, 3000));
+    //Moves browser to bottom of page
+    await new Promise(r => setTimeout(r, 3000));//Pauses 3 seconds so new schemes can load
     const newHeight = await page.evaluate("document.body.scrollHeight");
+    //“This avoids unnecessary scrolling once no additional scheme cards are loaded.”
     if (newHeight === previousHeight) break;
   }
 
   // Collect scheme URLs
+  //“This extracts all available scheme URLs from the listing page.”
   const schemeLinks = await page.evaluate(() =>
     Array.from(document.querySelectorAll("a[href*='/schemes/']")).map(a => a.href)
   );
-
+//“This removes duplicate scheme links before scraping.”
   const uniqueLinks = [...new Set(schemeLinks)];
+  //Prints how many schemes found
   console.log(`\n${'='.repeat(70)}`);
   console.log(`Found ${uniqueLinks.length} unique schemes to scrape`);
   console.log('='.repeat(70) + '\n');
@@ -64,13 +88,16 @@ async function scrapeMyScheme() {
       const data = await page.evaluate(() => {
         // ============ HELPER FUNCTIONS ============
         
+        // This function identifies if a line is likely a tag cloud or navigation element based on capitalization 
+        // and length, which are common in Indian government scheme pages.
         const isTagCloud = (line) => {
           if (!line || line.length < 10) return false;
           const capitals = (line.match(/[A-Z]/g) || []).length;
           const spaces = (line.match(/ /g) || []).length;
           return (capitals > 4 && spaces < 3);
         };
-        
+        // This function identifies common UI elements that are not part of the scheme content,
+        //  such as buttons or links.
         const isUIElement = (line) => {
           const lower = line.toLowerCase();
           return lower.includes('check eligibility') ||
@@ -88,7 +115,8 @@ async function scrapeMyScheme() {
                  lower.includes('news and updates') ||
                  lower.includes('frequently asked questions');
         };
-        
+        // This function checks if a line has meaningful content based on length 
+        // and whether it is not a tag cloud or UI element.
         const isMeaningfulContent = (line) => {
           return line.length > 15 && 
                  !isTagCloud(line) && 

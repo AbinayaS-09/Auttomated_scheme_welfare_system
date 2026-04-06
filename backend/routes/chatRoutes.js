@@ -4,10 +4,35 @@ const auth = require('../middleware/authMiddleware');
 const Groq = require('groq-sdk');
 const Scheme = require('../models/Schem');
 
+
+
+
+/*Each scheme object is converted into text.
+Frontend → user types message
+Backend Route → receives message
+Database → gives scheme details
+Groq AI → thinks and generates answer
+Frontend → shows reply
+
+*/
+
+
+
+
 router.post('/', auth(['user', 'admin']), async (req, res) => {
     try {
         console.log("Using API Key:", process.env.GROQ_API_KEY ? process.env.GROQ_API_KEY.substring(0, 10) + "..." : "UNDEFINED");
         const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
+        
+        
+        // Log incoming message and previous messages for debugging
+        /*{
+  "message": "Tell me schemes for students",
+  "previousMessages": [
+    { "role": "user", "content": "Hi" },
+    { "role": "assistant", "content": "Hello!" }
+  ]
+}*/
         const { message, previousMessages } = req.body;
 
 
@@ -32,6 +57,7 @@ Answer concisely and accurately about Indian government welfare schemes, eligibi
 ${schemeContext ? `\nAvailable schemes for context:\n${schemeContext}` : ''}`;
 
         // Build message history
+        //Each scheme object is converted into text.
         const msgs = [
             { role: 'system', content: systemPrompt },
             ...(previousMessages || []).filter(m => m.role === 'user' || m.role === 'assistant'),
@@ -56,3 +82,18 @@ ${schemeContext ? `\nAvailable schemes for context:\n${schemeContext}` : ''}`;
 });
 
 module.exports = router;
+/*1) Database knowledge
+
+From this:
+
+const schemes = await Scheme.findAll({ limit: 50 });
+
+This gives your own stored schemes.
+
+2) LLM built-in knowledge
+
+From this:
+
+const completion = await groq.chat.completions.create(...)
+
+This gives model’s general learned knowledge*/

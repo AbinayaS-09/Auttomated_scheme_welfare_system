@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+// The UserProfile component is responsible for displaying and managing the user's profile information. It fetches the user's profile data from the backend API and allows the user to view and edit their personal details such as name
 const UserProfile = () => {
   const navigate = useNavigate();
   const [profile, setProfile] = useState({

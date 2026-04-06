@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import UserAnalytics from '../components/UserAnalytics';
 import Chatbot from '../components/Chatbot';
-
+// The UserAnalyticsPage component is a dedicated page for displaying personalized analytics and insights to the user. It includes a header with navigation options, a main content area that renders the UserAnalytics component, and a footer. The page also provides a logout function that clears the user's authentication data and redirects them to the home page. Additionally, it integrates a chatbot for user assistance and support.
 const UserAnalyticsPage = () => {
   const navigate = useNavigate();
 

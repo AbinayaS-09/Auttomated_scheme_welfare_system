@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+//“This imports the scraper function used to collect scheme data from the source website.”
 const scrapeMyScheme = require("../scraper/myscheme.scraper");
 const schemeController = require("../controllers/schemeController");
 const auth = require("../middleware/authMiddleware");
@@ -7,7 +8,7 @@ const auth = require("../middleware/authMiddleware");
 // Sync schemes (Admin only or scheduled task)
 router.post("/sync", auth(["admin"]), async (req, res) => {
   try {
-    await scrapeMyScheme();
+    await scrapeMyScheme();//“This executes the scraper to collect and store latest scheme data.”
     const SchemeEligibilityParser = require("../utils/schemeEligibilityParser");
     await SchemeEligibilityParser.migrateAllSchemes();
     res.json({ message: "Government schemes synced successfully" });

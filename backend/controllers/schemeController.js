@@ -6,6 +6,7 @@ const { Op } = require("sequelize");
 const sequelize = require("../config/db");
 
 // GET DASHBOARD STATS
+// This endpoint provides key statistics for the user dashboard, including total schemes, eligible schemes, application count, and profile completeness. It uses the FuzzyEligibilityMatcher to calculate eligible schemes based on the user's profile.
 exports.getDashboardStats = async (req, res) => {
   try {
     const userId = req.user.id;

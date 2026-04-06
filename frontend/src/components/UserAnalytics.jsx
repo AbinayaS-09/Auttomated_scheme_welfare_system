@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { 
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, 
   Cell, PieChart, Pie, Legend, RadialBarChart, RadialBar, PolarAngleAxis
-} from 'recharts';
+} from 'recharts';  //react chart librray for rendering charts
 import { Award, Zap, ChevronRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 

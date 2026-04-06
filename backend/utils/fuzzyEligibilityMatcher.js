@@ -269,7 +269,7 @@ class FuzzyEligibilityMatcher {
         return { score: 0, details, totalWeight: 0, achievedScore: 0, eligible: false, reason: "Category not eligible" };
       }
     }
-
+// Location filters (state/district) are also treated as hard filters in this implementation
     if (Array.isArray(schemeEligibility.eligibleStates) &&
         schemeEligibility.eligibleStates.length > 0) {
       if (!schemeEligibility.eligibleStates.includes(userProfile.state)) {

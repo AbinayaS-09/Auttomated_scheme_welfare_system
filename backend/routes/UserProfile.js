@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/db");
 const User = require("./User");
-
+// UserProfile.js defines the UserProfile model with fields for user demographics,
 const UserProfile = sequelize.define("UserProfile", {
   name: { type: DataTypes.STRING },
   age: { type: DataTypes.INTEGER },

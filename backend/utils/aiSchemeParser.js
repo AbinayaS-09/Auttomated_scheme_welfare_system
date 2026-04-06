@@ -6,6 +6,48 @@ console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++");
 console.log("PROCESS KEY:", process.env.GROQ_API_KEY);
 console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++");
 
+
+/*This file does:
+Reads scheme text
+
+↓
+
+Sends it to AI
+
+↓
+
+AI extracts fields
+
+↓
+
+Saves extracted eligibility into DB
+
+That’s all.*/
+
+
+
+
+
+/*Because your recommendation system probably compares user profile like:
+
+{
+  "age": 22,
+  "gender": "Female",
+  "isStudent": true,
+  "income": 120000
+}
+
+with scheme conditions like:
+
+{
+  "minAge": 18,
+  "maxAge": 25,
+  "requiresStudent": true,
+  "maxIncome": 250000
+}
+
+So parser is preparing this structured eligibility data automatically from the unstructured text provided in the schemes.
+ This way, when a user queries for schemes, the system can easily match their profile against these structured criteria to find relevant schemes.*/
 class AISchemeParser {
   constructor(apiKey) {
     const keys = (apiKey || process.env.GROQ_API_KEY || '').split(',');

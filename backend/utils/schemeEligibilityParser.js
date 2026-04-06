@@ -6,6 +6,14 @@ class SchemeEligibilityParser {
   /**
    * Parse eligibility text and extract structured criteria
    */
+
+  /*{
+  "minAge": 18,
+  "maxAge": 25,
+  "gender": "Female",
+  "maxIncome": 250000,
+  "requiresStudent": true
+}*/
   static parseEligibility(eligibilityText, benefitsText = '') {
     const eligibility = {
       minAge: null,
@@ -40,10 +48,15 @@ class SchemeEligibilityParser {
       specialConditions: null,
       rawEligibilityText: eligibilityText
     };
+    // Combine eligibility and benefits text for parsing since sometimes criteria are mentioned in benefits section
 
     const text = (eligibilityText + ' ' + benefitsText).toLowerCase();
 
     // Parse Age
+    /*18 to 25”
+“between 18 and 25”
+“25 years or below”
+    */
     const ageMatches = [
       /age.*?(\d+)\s*(?:to|and|-)\s*(\d+)/i,
       /(\d+)\s*(?:to|and|-)\s*(\d+)\s*years/i,
@@ -65,7 +78,7 @@ class SchemeEligibilityParser {
       }
     }
 
-    // Parse Income
+    // Parse Income->2 lakh → 200000
     const incomeMatches = [
       /income.*?not\s*exceed.*?₹?\s*(\d+)\s*lakh/i,
       /income.*?less\s*than.*?₹?\s*(\d+)\s*lakh/i,
@@ -111,7 +124,7 @@ class SchemeEligibilityParser {
       }
     }
 
-    // Parse Special Groups
+    // Parse Special Groups  40% disability
     eligibility.requiresFarmer = text.includes('farmer') || text.includes('agriculture');
     eligibility.requiresStudent = text.includes('student') || text.includes('scholar');
     eligibility.requiresWidow = text.includes('widow');
@@ -222,6 +235,7 @@ class SchemeEligibilityParser {
         failed: 0,
         errors: []
       };
+      // Process each scheme sequentially to avoid overwhelming the database and to get detailed logging
 
       for (const scheme of schemes) {
         try {
@@ -229,6 +243,7 @@ class SchemeEligibilityParser {
             scheme.eligibility || '',
             scheme.benefits || ''
           );
+          // Upsert eligibility data for each scheme
 
           await SchemeEligibility.create({
             schemeId: scheme.id,

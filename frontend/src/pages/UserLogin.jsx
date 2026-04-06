@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+// The UserLogin component provides a login form for users to access their accounts. It includes fields for email and password, and manages form data using React's useState hook. Upon submission, it sends a POST request to the backend API to authenticate the user. If successful, it stores the authentication token and user role in localStorage and redirects the user to their profile page. If authentication fails, it displays an error message. The component also includes navigation links for registration and password recovery.
 const UserLogin = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({

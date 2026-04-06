@@ -3,7 +3,7 @@ frontend/node_modules/
 .cache/
 frontend/node_modules/.cache/
 .env
-build/
+
 dist/node_modules/
 frontend/node_modules/
 .cache/

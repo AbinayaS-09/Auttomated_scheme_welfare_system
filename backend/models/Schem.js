@@ -1,6 +1,9 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/db");
-
+// Scheme.js defines the Scheme model which represents the government schemes in the database.
+//  It includes fields for scheme name, ministry, description, eligibility criteria, benefits, application process, 
+// required documents, and metadata about the scheme's source and scraping time.
+//  This model is used to store and manage the details of each scheme in the database.
 const Scheme = sequelize.define(
   "Scheme",
   {
